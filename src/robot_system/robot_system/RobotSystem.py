@@ -1,15 +1,15 @@
 import traceback
 from library.Constants import ResponseDataList, ResponseCode, DeviceStatus, DeviceCode, RobotCommand, RobotParameter
-from message.srv.RobotService import RobotService
+from message.srv import RobotService
 import datetime
 
 class RobotSystem:
     """
         로봇 시스템 클래스
     """
-    ANSWER_CMD = [RobotCommand.HOME_NORMAL, RobotCommand.GRIPPER_INIT, RobotCommand.PICKUP, RobotCommand.PLACE_CUP, RobotCommand.PIKCUP,
+    ANSWER_CMD = [RobotCommand.HOME_NORMAL, RobotCommand.GRIPPER_INIT, RobotCommand.PICKUP, RobotCommand.PLACE_CUP, RobotCommand.PICKUP,
                   RobotCommand.DRAIN_FIT, RobotCommand.HOME_KETTLE, RobotCommand.DRIP, RobotCommand.HOME_KETTLE, RobotCommand.DRAIN_ALL,
-                  RobotCommand.PLACE, RobotCommand.HOME_NORMAL, RobotCommand.PICKUP_CUP, RobotCommand.PLACE, RobotCommand.GETSTURE]
+                  RobotCommand.PLACE, RobotCommand.HOME_NORMAL, RobotCommand.PICKUP_CUP, RobotCommand.PLACE, RobotCommand.GESTURE]
     ANSWER_PARAMETER = [RobotParameter.ZERO, RobotParameter.ZERO, RobotParameter.DSP, RobotParameter.ZON, RobotParameter.KET, RobotParameter.DPO, RobotParameter.ZERO,
 					RobotParameter.DPO, RobotParameter.ZERO, RobotParameter.ZERO, RobotParameter.KET, RobotParameter.ZERO, RobotParameter.ZON, RobotParameter.PIC, RobotParameter.ETC]
     def __init__(self):

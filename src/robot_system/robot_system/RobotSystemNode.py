@@ -8,7 +8,7 @@ from message.srv import RobotService
 from rclpy.node import Node
 from rclpy.qos import QoSProfile
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
-from RobotSystem import RobotSystem
+from robot_system.RobotSystem import RobotSystem
 
 class RobotSystemNode(Node):
     GRIPPER_INIT = 'gripper_init'
@@ -24,7 +24,7 @@ class RobotSystemNode(Node):
 
         # 로봇 시스템 요청 서비스
         self.service = self.create_service(RobotService, Service.SERVICE_ROBOT, self.callback_robot_service
-                                           , qos_profile=qos_profile, callback_group= self.control_group)
+                                           , qos_profile=qos_profile)
 
         # 로봇 시스템 상태 정보 송신
         self.publisher = self.create_publisher(DispenserStatus, Topic.ROBOT_STATUS, qos_profile=qos_profile)
@@ -33,9 +33,7 @@ class RobotSystemNode(Node):
         self.timer = self.create_timer(timer_period_sec=Constants.TIMER_PERIOD, callback= self.timer_execute)
 
         self.robot_system = RobotSystem()
-        self.node_status = self.init()
-
-
+        self.node_status = DeviceStatus.STANDBY
     def set_status(self, status):
         self.node_status = status
         return self.node_status
@@ -62,10 +60,10 @@ class RobotSystemNode(Node):
             
         except Exception as error:
             print(f"RobotSystemNode callback_robot_service {error=}, {type(error)=}")
-            self.logger.error(traceback.format_exc())
+
             response.seq_no = request.seq_no
             response.component_cd = DeviceCode.ROBOT
-            response.response_cd = ResponseCode.ROB_CMD_ROBOT_EXECUTE_FAIL.value
+            response.response_cd = ResponseCode.ERROR
             response.status_cd = DeviceStatus.ERROR
             response.result = request.cmd
            
@@ -83,38 +81,27 @@ class RobotSystemNode(Node):
             topic_msg = DispenserStatus()
 
             topic_msg.seq_no = str(datetime.datetime.now())
-            component_list.append(self.component_status(self.robot_system.robot))
+            component_list.append(self.component_status())
             topic_msg.component = component_list
-            topic_msg.node_status = component_list.status
+            topic_msg.node_status = component_list[0].status
             self.publisher.publish(topic_msg)
 
         except Exception as error:
             print(f"RobotSystemNode timer_execute {error=}, {type(error)=}")
-            self.logger.error(traceback.format_exc())
+           
 
-    def component_status(self, component):
+    def component_status(self):
         status_msg = ComponentStatus()
         try :
-            if self.node_status == DeviceStatus.STANDBY or self.node_status == DeviceStatus.WORKING:
-                status_value = component.get_status()
-                
-                status_data = status_value.data
-
-                status_msg.status = status_data.status_cd
-                status_msg.status_code = status_data.response_cd
-                status_msg.stock = Constants.ZERO
-                if status_data.response_cd != ResponseCode.SUCCESS.value:
-                    self.logger.error(f"RailComponent Error Code: {status_data.response_cd}")
-            else :
-                status_msg.status = self.node_status
-                status_msg.status_code = ResponseCode.ROB_CMD_GET_STATUS_FAIL.value
-                status_msg.stock = Constants.ZERO
+            status_msg.status = DeviceStatus.STANDBY
+            status_msg.status_code = ResponseCode.SUCCESS
+            status_msg.stock = Constants.ZERO
         
         except Exception as error:
             print(f"RobotSystemNode component_status {error=}, {type(error)=}")
-            self.logger.error(traceback.format_exc())
+            self.get_logger().error(traceback.format_exc())
             status_msg.status = DeviceStatus.ERROR
-            status_msg.status_code = ResponseCode.ROB_CMD_GET_STATUS_FAIL.value
+            status_msg.status_code = ResponseCode.ERROR
             status_msg.stock = Constants.ZERO
         finally :
             return status_msg

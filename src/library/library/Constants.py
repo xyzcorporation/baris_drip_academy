@@ -74,7 +74,7 @@ class ResponseDataList:
     data_list = []
     cmd = ""
 
-class ReponseCode:
+class ResponseCode:
     SUCCESS = 0  # 정상
     OFF = 1  # OFF 상태
     ON = 2  # ON 상태
