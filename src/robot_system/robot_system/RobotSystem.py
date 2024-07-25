@@ -30,97 +30,97 @@ class RobotSystem:
                 self.request_cnt += 1
                 if request.cmd == RobotCommand.HOME :
                     response.status_cd = DeviceStatus.STANDBY
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.DRAIN_ALL:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.DRIP:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.FLATTENING:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.GESTURE:
                     response.status_cd = DeviceStatus.STANDBY
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.HOLD:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.HOME_KETTLE:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.PLACE:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.PLACE_CUP:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.PLACE_DRIP:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.UNHOLD:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.GRIPPER_INIT:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.HOME_NORMAL:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.HOME_KETTLE:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.PICKUP:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.PICKUP_CUP:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.PICKUP_DRIP:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.PICKUP_DRIP:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.SHUTDOWN:
                     response.status_cd = DeviceStatus.WORKING
-                    response.response_cd = ResponseCode.SUCESS
+                    response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
                 else :
                     response.status_cd = DeviceStatus.ERROR

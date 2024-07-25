@@ -66,6 +66,7 @@ class RobotCommand:
     STOP = 'STOP'
     RUN = 'RUN'
     RESTART = 'RESTART'
+    HOME = 'HOME'
 
 class ResponseDataList:
     response_cd= 999
@@ -80,6 +81,7 @@ class ResponseCode:
     ON = 2  # ON 상태
     STANDBY = 3  # STANDBY 상태
     WORKING = 4  # WORKING 상태
+    ERROR = 9
 class Constants:
     ZERO = 0
     ONE = 1

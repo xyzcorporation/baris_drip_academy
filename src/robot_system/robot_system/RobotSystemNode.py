@@ -50,12 +50,11 @@ class RobotSystemNode(Node):
         try:
 
             return_value = self.robot_system.execute(request= request)
-            return_data = return_value.data
             response.seq_no =  request.seq_no
-            response.component_cd = return_data.component_cd
-            response.response_cd = return_data.response_cd
-            response.status_cd = return_data.status_cd
-            response.result = str(return_data.data_list)
+            response.component_cd = return_value.component_cd
+            response.response_cd = return_value.response_cd
+            response.status_cd = return_value.status_cd
+            response.result = return_value.result
             
             
         except Exception as error:
