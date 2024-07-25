@@ -8,7 +8,7 @@ from message.srv import RobotService
 from rclpy.node import Node
 from rclpy.qos import QoSProfile
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
-from robot_system.RobotSystem import RobotSystem
+from RobotSystem import RobotSystem
 
 class RobotSystemNode(Node):
     GRIPPER_INIT = 'gripper_init'

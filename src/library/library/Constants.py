@@ -44,7 +44,6 @@ class RobotParameter:
     PIC = 'PIC'
     ETC = 'ETC'
 
-
 class RobotCommand:
     DRAIN_ALL = 'DRAIN_ALL'
     DRAIN_FIT = 'DRAIN_FIT'
