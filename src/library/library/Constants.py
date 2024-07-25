@@ -35,6 +35,16 @@ class Command:
     ENDTEACH = 'ENDTEACH'
 
 
+class RobotParameter:
+    ZERO = '0'
+    DSP = 'DSP'
+    ZON = 'ZON'
+    KET = 'KET'
+    DPO = 'DPO'
+    PIC = 'PIC'
+    ETC = 'ETC'
+
+
 class RobotCommand:
     DRAIN_ALL = 'DRAIN_ALL'
     DRAIN_FIT = 'DRAIN_FIT'
