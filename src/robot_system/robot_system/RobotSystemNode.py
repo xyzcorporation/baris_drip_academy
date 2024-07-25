@@ -23,8 +23,7 @@ class RobotSystemNode(Node):
         qos_profile = QoSProfile(depth=Constants.QOS_DEFAULT)
 
         # 로봇 시스템 요청 서비스
-        self.service = self.create_service(RobotService, Service.SERVICE_ROBOT, self.callback_robot_service
-                                           , qos_profile=qos_profile)
+        self.service = self.create_service(RobotService, Service.SERVICE_ROBOT, self.callback_robot_service)
 
         # 로봇 시스템 상태 정보 송신
         self.publisher = self.create_publisher(DispenserStatus, Topic.ROBOT_STATUS, qos_profile=qos_profile)
@@ -34,6 +33,9 @@ class RobotSystemNode(Node):
 
         self.robot_system = RobotSystem()
         self.node_status = DeviceStatus.STANDBY
+
+        print('!!!!!!!!!!!!!!!!!!!!!')
+
     def set_status(self, status):
         self.node_status = status
         return self.node_status
@@ -84,6 +86,8 @@ class RobotSystemNode(Node):
             topic_msg.component = component_list
             topic_msg.node_status = component_list[0].status
             self.publisher.publish(topic_msg)
+
+            print("1111111timer_execute11111")
 
         except Exception as error:
             print(f"RobotSystemNode timer_execute {error=}, {type(error)=}")
