@@ -1,5 +1,5 @@
 import traceback
-from library.Constants import ResponseDataList, ResponseCode, DeviceStatus, DeviceCode, RobotCommand, RobotParameter
+from library.Constants import ResponseDataList, ResponseCode, DeviceStatus, DeviceCode, RobotCommand, RobotParameter, Constants
 from message.srv import RobotService
 import datetime
 
@@ -26,7 +26,13 @@ class RobotSystem:
             request_list = [request.cmd, request.par1, request.par2, request.par3, request.par4, request.par5]
             response.component_cd = DeviceCode.ROBOT
             response.seq_no = str(datetime.datetime.now())
-            if request.cmd == RobotSystem.ANSWER_CMD[self.request_cnt] and request.par1 == RobotSystem.ANSWER_PARAMETER[self.request_cnt]:
+            if request.cmd == RobotCommand.RESET:
+                self.request_cnt = Constants.ZERO
+                response.status_cd = DeviceStatus.STANDBY
+                response.response_cd = ResponseCode.SUCCESS
+                response.result = "RESET SEQUENCE"
+
+            elif request.cmd == RobotSystem.ANSWER_CMD[self.request_cnt] and request.par1 == RobotSystem.ANSWER_PARAMETER[self.request_cnt]:
                 self.request_cnt += 1
                 if request.cmd == RobotCommand.HOME :
                     response.status_cd = DeviceStatus.STANDBY

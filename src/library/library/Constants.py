@@ -67,7 +67,7 @@ class RobotCommand:
     RUN = 'RUN'
     RESTART = 'RESTART'
     HOME = 'HOME'
-
+    RESET = 'RESET'
 class ResponseDataList:
     response_cd= 999
     status_cd = ""
@@ -93,8 +93,8 @@ class Constants:
     QOS_DEFAULT = 20
 
 class Service:
-    SERVICE_ROBOT = 'XYZ_Robot/service'
-    SERVICE_RTDE = 'XYZ_Rtde/service'
+    SERVICE_ROBOT = 'XYZ_robot/service'
+    SERVICE_RTDE = 'XYZ_rtde/service'
 
 class Topic:
     ROBOT_STATUS = 'XYZ_robot/status'
