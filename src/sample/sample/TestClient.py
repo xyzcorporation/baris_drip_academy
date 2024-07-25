@@ -2,7 +2,7 @@ import rclpy as rp
 from rclpy.node import Node
 from rclpy.qos import QoSProfile
 
-from library.Constants import Service
+from library.Constants import Service, RobotCommand, RobotParameter
 from message.srv import RobotService
 import traceback
 import datetime
@@ -53,16 +53,11 @@ class SampleNode(Node):
             button = input('Button')
 
             if button == 'home':
-                srv_req.seq_no = str(datetime.datetime.now())
-                srv_req.cmd = 'HOME_NORMAL'
-                srv_req.par1 = '0'
-                srv_req.par2 = '0'
-                srv_req.par3 = '0'
-                srv_req.par4 = '0'
-                srv_req.par5 = '0'
+                srv_req = self.robot_request(RobotCommand.HOME_NORMAL,RobotParameter.ZERO)
             else:
                 srv_req = None
-
+            response = self.call_service(self.client, srv_req)
+            print(f"Response {response.status_cd}, {response.response_cd}, {response.component_cd}, {response.result}")
     def call_service(self, client, request):
         try:
             future = client.call_async(request)
@@ -74,8 +69,8 @@ class SampleNode(Node):
 
     def robot_request(self, command, param1=None, param2=None, param3=None, param4=None, param5=None):
 
-        srv_req = RobotService.Request
-
+        srv_req = RobotService.Request()
+        srv_req.seq_no = str(datetime.datetime.now())
         srv_req.cmd = command
 
         srv_req.par1 = str(param1) if param1 else '0'
