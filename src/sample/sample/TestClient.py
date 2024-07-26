@@ -1,9 +1,9 @@
 import rclpy as rp
 from rclpy.node import Node
 from rclpy.qos import QoSProfile
-
+import time
 from library.Constants import Service, RobotCommand, RobotParameter, Command
-from message.srv import RobotService
+from message.srv import RobotService, DispenseService
 import traceback
 import datetime
 
@@ -36,7 +36,7 @@ class SampleNode(Node):
         super().__init__('TestSample')
         self.qos_profile = QoSProfile(depth=25)
         self.client = self.create_client(RobotService, Service.SERVICE_ROBOT, qos_profile=self.qos_profile)
-
+        self.dispenser_client = self.create_client(DispenseService, Service.SERVICE_DISPENSER, qos_profile=self.qos_profile)
         print('@@@@@@@@@@@@')
 
         while not self.client.wait_for_service(timeout_sec=1.0):
@@ -82,12 +82,36 @@ class SampleNode(Node):
                 srv_req = self.robot_request(RobotCommand.PLACE, RobotParameter.BIN)
             elif button == 'reset':
                 srv_req = self.robot_request(Command.RESET, RobotParameter.ZERO)
+            elif button == 'water':
+                srv_req = self.dispenser_request(dev_id='WATER',command= 'WATER_TOGGLE')
+                res = self.dsp_service(self.dispenser_client, srv_req)
+                time.sleep(0.05)
+                srv_req = self.dispenser_request(dev_id='WATER', command='WATER_PIN_RESET')
+                res = self.dsp_service(self.dispenser_client, srv_req)
+                time.sleep(4.0)
+                srv_req = self.dispenser_request(dev_id='WATER', command='WATER_TOGGLE')
+                res = self.dsp_service(self.dispenser_client, srv_req)
+                time.sleep(0.05)
+                srv_req = self.dispenser_request(dev_id='WATER', command='WATER_PIN_RESET')
+                res = self.dsp_service(self.dispenser_client, srv_req)
+                continue
+            elif button == 'stop_water':
+                srv_req = self.robot_request(Command.RESET, RobotParameter.ZERO)
+
             else:
                 print(f"The spelling is incorrect")
                 continue
             response = self.call_service(self.client, srv_req)
             print(f"Response {response.status_cd}, {response.response_cd}, {response.component_cd}, {response.result}")
     def call_service(self, client, request):
+        try:
+            future = client.call_async(request)
+            rp.spin_until_future_complete(self, future)
+            return future.result()
+        except Exception as error:
+            print(f"call_service {error=}, {type(error)=}")
+            raise error
+    def dsp_service(self, client, request):
         try:
             future = client.call_async(request)
             rp.spin_until_future_complete(self, future)
@@ -109,6 +133,15 @@ class SampleNode(Node):
         srv_req.par5 = str(param5) if param5 else '0'
 
         return srv_req
+    def dispenser_request(self, dev_id=None, command=None):
+        srv_req = DispenseService.Request()
+
+        srv_req.seq_no = str(datetime.datetime.now())
+        srv_req.dev_id = dev_id
+        srv_req.command = command
+
+        return srv_req
+
 
 def main(args=None):
     rp.init(args=args)
