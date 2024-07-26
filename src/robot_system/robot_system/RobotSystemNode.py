@@ -1,25 +1,26 @@
 import datetime
-import time
+import traceback
+
 import rclpy as rp
 from library.Constants import Service, Topic, Constants, DeviceCode, DeviceStatus, ResponseCode
-import traceback
 from message.msg import DispenserStatus, ComponentStatus
 from message.srv import RobotService
 from rclpy.node import Node
 from rclpy.qos import QoSProfile
-from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 from robot_system.RobotSystem import RobotSystem
+
 
 class RobotSystemNode(Node):
     GRIPPER_INIT = 'gripper_init'
     SHAKE = 'shake'
     HOME = 'home'
     RAIL_BASE = 'rail_base'
+
     def __init__(self):
         super().__init__(Constants.ROBOTS_SYSTEM)
-        # self.rtde = URRobotRtde()
+
         # 로거 설정
-       
+
         qos_profile = QoSProfile(depth=Constants.QOS_DEFAULT)
 
         # 로봇 시스템 요청 서비스
@@ -27,18 +28,17 @@ class RobotSystemNode(Node):
 
         # 로봇 시스템 상태 정보 송신
         self.publisher = self.create_publisher(DispenserStatus, Topic.ROBOT_STATUS, qos_profile=qos_profile)
-        
+
         # 로봇 시스템 토픽 타이머 변수
-        self.timer = self.create_timer(timer_period_sec=Constants.TIMER_PERIOD, callback= self.timer_execute)
+        self.timer = self.create_timer(timer_period_sec=Constants.TIMER_PERIOD, callback=self.timer_execute)
 
         self.robot_system = RobotSystem()
         self.node_status = DeviceStatus.STANDBY
 
-        print('!!!!!!!!!!!!!!!!!!!!!')
-
     def set_status(self, status):
         self.node_status = status
         return self.node_status
+
     def get_status(self):
         return self.node_status
 
@@ -51,14 +51,13 @@ class RobotSystemNode(Node):
         """
         try:
 
-            return_value = self.robot_system.execute(request= request)
-            response.seq_no =  request.seq_no
+            return_value = self.robot_system.execute(request=request)
+            response.seq_no = request.seq_no
             response.component_cd = return_value.component_cd
             response.response_cd = return_value.response_cd
             response.status_cd = return_value.status_cd
             response.result = return_value.result
-            
-            
+
         except Exception as error:
             print(f"RobotSystemNode callback_robot_service {error=}, {type(error)=}")
 
@@ -67,7 +66,7 @@ class RobotSystemNode(Node):
             response.response_cd = ResponseCode.ERROR
             response.status_cd = DeviceStatus.ERROR
             response.result = request.cmd
-           
+
         finally:
             return response
 
@@ -91,23 +90,23 @@ class RobotSystemNode(Node):
 
         except Exception as error:
             print(f"RobotSystemNode timer_execute {error=}, {type(error)=}")
-           
 
     def component_status(self):
         status_msg = ComponentStatus()
-        try :
+        try:
             status_msg.status = DeviceStatus.STANDBY
             status_msg.status_code = ResponseCode.SUCCESS
             status_msg.stock = Constants.ZERO
-        
+
         except Exception as error:
             print(f"RobotSystemNode component_status {error=}, {type(error)=}")
             self.get_logger().error(traceback.format_exc())
             status_msg.status = DeviceStatus.ERROR
             status_msg.status_code = ResponseCode.ERROR
             status_msg.stock = Constants.ZERO
-        finally :
+        finally:
             return status_msg
+
 
 def main(args=None):
     """
@@ -117,12 +116,10 @@ def main(args=None):
     node = RobotSystemNode()
     try:
         rp.spin(node)
-        # executor.add_node(node)
-        # executor.spin()
     except KeyboardInterrupt:
-       print('Keyboard Interrupt (SIGINT)')
+        print('Keyboard Interrupt (SIGINT)')
 
-    except SystemExit:               # <--- process the exception
+    except SystemExit:  # <--- process the exception
         print("RobotSystemNode System Exiting")
 
         topic_msg = DispenserStatus()
@@ -136,14 +133,11 @@ def main(args=None):
 
         node.publisher.publish(topic_msg)
 
-
     except Exception as error:
         print(f"RobotSystemNode main {error=}, {type(error)=}")
         print(traceback.format_exc())
     finally:
         print("RobotSystemNode System Deinit")
-        # node.robot_system.deinit()
-        # executor.shutdown()
         node.destroy_node()
         rp.shutdown()
 

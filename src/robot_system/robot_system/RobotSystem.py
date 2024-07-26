@@ -66,6 +66,7 @@ class RobotSystem:
 
     def get_cur_cmd(self):
         return self.before_pos
+
     def execute(self, request):
         response = None
         response = RobotService.Response()
@@ -91,6 +92,7 @@ class RobotSystem:
                     response.status_cd = DeviceStatus.WORKING
                     response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
+
                 elif request.cmd == RobotCommand.DRAIN_FIT:
                     response.status_cd = DeviceStatus.WORKING
                     response.response_cd = ResponseCode.SUCCESS
@@ -197,8 +199,7 @@ class RobotSystem:
             print(f"RobotSystem execute {error=}, {type(error)=}")
             print(traceback.format_exc())
 
-        finally :
-
+        finally:
             return response
         
     def make_str(self, result_list):
@@ -215,7 +216,7 @@ class RobotSystem:
             result_str = "ERROR"
         finally: 
             return result_str 
-        
-if __name__ == '__main__':
 
+
+if __name__ == '__main__':
     pass
