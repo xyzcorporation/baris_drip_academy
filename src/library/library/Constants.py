@@ -122,10 +122,8 @@ class Service:
     SERVICE_ROBOT = 'XYZ_robot/service'
     SERVICE_DISPENSER = 'XYZ_dispenser/service'
 
-
 class Topic:
     ROBOT_STATUS = 'XYZ_robot/status'
-
 
 class DeviceCode:
     ROBOT = 'ROBOT'
