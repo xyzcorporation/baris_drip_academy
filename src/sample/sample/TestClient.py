@@ -69,7 +69,7 @@ class SampleNode(Node):
                 srv_req = self.robot_request(RobotCommand.HOME_KETTLE, RobotParameter.ZERO)
             elif button == 'drip':
                 srv_req = self.robot_request(RobotCommand.DRIP, RobotParameter.DPO, RobotParameter.SOL,
-                                             RobotParameter.ONE, RobotParameter.ONE)
+                                             RobotParameter.HOT, RobotParameter.ONE,RobotParameter.ONE)
             elif button == 'place_kettle':
                 srv_req = self.robot_request(RobotCommand.PLACE, RobotParameter.KET)
             elif button == 'pickup_cup':
@@ -77,7 +77,7 @@ class SampleNode(Node):
             elif button == 'place_pic':
                 srv_req = self.robot_request(RobotCommand.PLACE, RobotParameter.PIC, RobotParameter.ONE)
             elif button == 'gesture':
-                srv_req = self.robot_request(RobotCommand.GESTURE, RobotParameter.ETC)
+                srv_req = self.robot_request(RobotCommand.GESTURE, RobotParameter.ETC, RobotParameter.TWO)
             elif button == 'bin':
                 srv_req = self.robot_request(RobotCommand.PLACE, RobotParameter.BIN)
             elif button == 'reset':
