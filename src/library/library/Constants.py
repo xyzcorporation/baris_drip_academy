@@ -49,6 +49,7 @@ class RobotParameter:
     HOT = 'HOT'
     SOL = 'SOL'
     BIN = 'BIN'
+    COF = 'COF'
 
 
 class RobotCommand:

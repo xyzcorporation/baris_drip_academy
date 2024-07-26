@@ -88,13 +88,59 @@ class SampleNode(Node):
                 time.sleep(0.05)
                 srv_req = self.dispenser_request(dev_id='WATER', command='WATER_PIN_RESET')
                 res = self.dsp_service(self.dispenser_client, srv_req)
+
                 time.sleep(8.0)
+
                 srv_req = self.dispenser_request(dev_id='WATER', command='WATER_TOGGLE')
                 res = self.dsp_service(self.dispenser_client, srv_req)
                 time.sleep(0.05)
                 srv_req = self.dispenser_request(dev_id='WATER', command='WATER_PIN_RESET')
                 res = self.dsp_service(self.dispenser_client, srv_req)
                 continue
+            elif button == 'coffee':
+                step = 0
+                while True:
+                    if step == 0:
+                        srv_req = self.robot_request(RobotCommand.PICKUP, RobotParameter.DSP, RobotParameter.TWO)
+                        response = self.call_service(self.client, srv_req)
+                        step += 1
+                    elif step == 1:
+                        srv_req = self.robot_request(RobotCommand.HOLD, RobotParameter.COF, RobotParameter.TWO)
+                        response = self.call_service(self.client, srv_req)
+                        step += 1
+                    elif step == 2:
+                        srv_req = self.dispenser_request(dev_id='COFFEE', command='COFFEE_ON')
+                        res = self.dsp_service(self.dispenser_client, srv_req)
+                        time.sleep(0.05)
+                        srv_req = self.dispenser_request(dev_id='COFFEE', command='COFFEE_PIN_RESET')
+                        res = self.dsp_service(self.dispenser_client, srv_req)
+
+                        time.sleep(0.5)
+
+                        srv_req = self.dispenser_request(dev_id='COFFEE', command='COFFEE_OFF')
+                        res = self.dsp_service(self.dispenser_client, srv_req)
+                        time.sleep(0.05)
+                        srv_req = self.dispenser_request(dev_id='COFFEE', command='COFFEE_PIN_RESET')
+                        res = self.dsp_service(self.dispenser_client, srv_req)
+                        step += 1
+                    elif step == 3:
+                        srv_req = self.robot_request(RobotCommand.HOME_NORMAL, RobotParameter.ZERO)
+                        response = self.call_service(self.client, srv_req)
+                        step += 1
+                    elif step == 4:
+                        srv_req = self.robot_request(RobotCommand.FLATTENING, RobotParameter.ZON, RobotParameter.ONE)
+                        response = self.call_service(self.client, srv_req)
+                        step += 1
+                    elif step == 5:
+                        srv_req = self.robot_request(RobotCommand.PLACE_DRIP, RobotParameter.ZON, RobotParameter.ONE)
+                        response = self.call_service(self.client, srv_req)
+                        step += 1
+
+                    if step > 6:
+                        break
+                    else:
+                        continue
+
             elif button == 'stop_water':
                 srv_req = self.robot_request(Command.RESET, RobotParameter.ZERO)
 
@@ -103,6 +149,7 @@ class SampleNode(Node):
                 continue
             response = self.call_service(self.client, srv_req)
             print(f"Response {response.status_cd}, {response.response_cd}, {response.component_cd}, {response.result}")
+
     def call_service(self, client, request):
         try:
             future = client.call_async(request)
@@ -111,6 +158,7 @@ class SampleNode(Node):
         except Exception as error:
             print(f"call_service {error=}, {type(error)=}")
             raise error
+
     def dsp_service(self, client, request):
         try:
             future = client.call_async(request)
@@ -133,6 +181,7 @@ class SampleNode(Node):
         srv_req.par5 = str(param5) if param5 else '0'
 
         return srv_req
+
     def dispenser_request(self, dev_id=None, command=None):
         srv_req = DispenseService.Request()
 
@@ -150,6 +199,7 @@ def main(args=None):
         rp.spin(sample_node)
     except Exception as error:
         print(f"main error {error=}, {type(error)=}")
+
 
 if __name__ == '__main__':
     main()
