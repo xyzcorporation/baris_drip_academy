@@ -79,7 +79,7 @@ class RobotSystemNode(Node):
         component_list = []
         try:
             # Msg 변수 선언
-            if self.robot_system.request_cnt > 14:
+            if self.robot_system.request_cnt > 15:
                 self.get_logger().info(f"DRIP DONE")
             topic_msg = DispenserStatus()
             self.get_logger().info(f"Current Cmd {self.robot_system.get_cur_cmd()}")

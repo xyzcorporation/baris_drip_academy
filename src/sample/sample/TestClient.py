@@ -55,30 +55,35 @@ class SampleNode(Node):
             elif button == 'gripper':
                 srv_req = self.robot_request(RobotCommand.GRIPPER_INIT, RobotParameter.ZERO)
             elif button == 'pickup_dsp':
-                srv_req = self.robot_request(RobotCommand.PICKUP, RobotParameter.DSP)
+                srv_req = self.robot_request(RobotCommand.PICKUP, RobotParameter.DSP, RobotParameter.ONE)
             elif button == 'pickup_kettle':
                 srv_req = self.robot_request(RobotCommand.PICKUP, RobotParameter.KET)
             elif button == 'place_cup':
-                srv_req = self.robot_request(RobotCommand.PLACE_CUP, RobotParameter.ZON)
+                srv_req = self.robot_request(RobotCommand.PLACE_CUP, RobotParameter.ZON, RobotParameter.ONE)
             elif button == 'drain_fit':
-                srv_req = self.robot_request(RobotCommand.DRAIN_FIT, RobotParameter.DPO)
+                srv_req = self.robot_request(RobotCommand.DRAIN_FIT, RobotParameter.HOT, RobotParameter.ONE,
+                                             RobotParameter.DPO)
             elif button == 'drain_all':
                 srv_req = self.robot_request(RobotCommand.DRAIN_ALL, RobotParameter.ZERO)
             elif button == 'home_kettle':
                 srv_req = self.robot_request(RobotCommand.HOME_KETTLE, RobotParameter.ZERO)
             elif button == 'drip':
-                srv_req = self.robot_request(RobotCommand.DRIP, RobotParameter.DPO)
+                srv_req = self.robot_request(RobotCommand.DRIP, RobotParameter.DPO, RobotParameter.SOL,
+                                             RobotParameter.ONE, RobotParameter.ONE)
             elif button == 'place_kettle':
                 srv_req = self.robot_request(RobotCommand.PLACE, RobotParameter.KET)
             elif button == 'pickup_cup':
-                srv_req = self.robot_request(RobotCommand.PICKUP_CUP, RobotParameter.ZON)
+                srv_req = self.robot_request(RobotCommand.PICKUP_CUP, RobotParameter.ZON, RobotParameter.ONE)
             elif button == 'place_pic':
-                srv_req = self.robot_request(RobotCommand.PLACE, RobotParameter.PIC)
+                srv_req = self.robot_request(RobotCommand.PLACE, RobotParameter.PIC, RobotParameter.ONE)
             elif button == 'gesture':
                 srv_req = self.robot_request(RobotCommand.GESTURE, RobotParameter.ETC)
+            elif button == 'bin':
+                srv_req = self.robot_request(RobotCommand.PLACE, RobotParameter.BIN)
             elif button == 'reset':
                 srv_req = self.robot_request(Command.RESET, RobotParameter.ZERO)
             else:
+                print(f"The spelling is incorrect")
                 continue
             response = self.call_service(self.client, srv_req)
             print(f"Response {response.status_cd}, {response.response_cd}, {response.component_cd}, {response.result}")

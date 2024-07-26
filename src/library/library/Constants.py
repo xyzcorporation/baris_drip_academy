@@ -38,12 +38,17 @@ class Command:
 
 class RobotParameter:
     ZERO = '0'
+    ONE = '1'
     DSP = 'DSP'
     ZON = 'ZON'
     KET = 'KET'
     DPO = 'DPO'
     PIC = 'PIC'
     ETC = 'ETC'
+    HOT = 'HOT'
+    SOL = 'SOL'
+    BIN = 'BIN'
+
 
 class RobotCommand:
     DRAIN_ALL = 'DRAIN_ALL'
