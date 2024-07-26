@@ -17,9 +17,12 @@ class RobotSystem:
 
         # 로봇 객체
         self.robot = None
-        self.before_pos = "HOME"
+        self.before_pos = "cmd"
         self.request_pos= None
         self.request_cnt = 0
+
+    def get_cur_cmd(self):
+        return self.before_pos
     def execute(self, request):
         response = None
         response = RobotService.Response()
@@ -35,12 +38,17 @@ class RobotSystem:
 
             elif request.cmd == RobotSystem.ANSWER_CMD[self.request_cnt] and request.par1 == RobotSystem.ANSWER_PARAMETER[self.request_cnt]:
                 self.request_cnt += 1
+                self.before_pos = request.cmd
                 if request.cmd == RobotCommand.HOME :
                     response.status_cd = DeviceStatus.STANDBY
                     response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
 
                 elif request.cmd == RobotCommand.DRAIN_ALL:
+                    response.status_cd = DeviceStatus.WORKING
+                    response.response_cd = ResponseCode.SUCCESS
+                    response.result = self.make_str(request_list)
+                elif request.cmd == RobotCommand.DRAIN_FIT:
                     response.status_cd = DeviceStatus.WORKING
                     response.response_cd = ResponseCode.SUCCESS
                     response.result = self.make_str(request_list)
@@ -147,7 +155,7 @@ class RobotSystem:
             print(traceback.format_exc())
 
         finally :
-            self.before_pos = request.cmd
+
             return response
         
     def make_str(self, result_list):
