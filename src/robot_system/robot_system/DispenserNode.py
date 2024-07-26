@@ -27,7 +27,7 @@ class DispenserNode(Node):
         self.dispenser = DIODispenser()
 
     def xyz_callback_service(self, request, response):
-
+        self.get_logger().info(f' Request Cmd : {request.command}')
         if request.command == DispenseCommand.COFFEE_ON:
             response = self.dispenser.dispense(DispenseCommand.COFFEE_ON)
             time.sleep(0.05)
