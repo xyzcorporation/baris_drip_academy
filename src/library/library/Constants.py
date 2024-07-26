@@ -79,8 +79,12 @@ class RobotCommand:
 class DispenseCommand:
     WATER_TOGGLE = 'WATER_TOGGLE'
     WATER_PIN_RESET = 'WATER_PIN_RESET'
+    COFFEE_PIN_RESET = 'COFFEE_PIN_RESET'
     COFFEE_TOGGLE = 'COFFEE_TOGGLE'
-
+    COFFEE_ON = 'COFFEE_ON'
+    COFFEE_OFF = 'COFFEE_OFF'
+    WATER = 'WATER'
+    COFFEE = 'COFFEE'
 class ResponseDataList:
     response_cd= 999
     status_cd = ""
@@ -107,20 +111,20 @@ class Constants:
     TIMER_PERIOD = 0.1
     ROBOTS_SYSTEM = 'RobotSystemNode'
     QOS_DEFAULT = 20
-
+    DISPENSER_NODE = 'DispenserNode'
 class Service:
-    SERVICE_ROBOT = 'XYZ_robot/service'
+    SERVICE_ROBOT = 'robot/service'
     SERVICE_RTDE = 'XYZ_rtde/service'
     SERVICE_DISPENSER = 'XYZ_dispenser/service'
 
 class Topic:
     ROBOT_STATUS = 'XYZ_robot/status'
 
-
 class DeviceCode:
     ROBOT = 'ROBOT'
     WATER = 'WATER'
     COFFEE= 'COFFEE'
+
 class DeviceStatus:
     STANDBY = 'STANDBY'
     WORKING = 'WORKING'

@@ -63,7 +63,7 @@ class SampleNode(Node):
             elif button == 'unhold':
                 srv_req = self.robot_request(RobotCommand.UNHOLD, RobotParameter.COF)
             elif button == 'flattening':
-                srv_req = self.robot_request(RobotCommand.UNHOLD, RobotParameter.ZON, RobotParameter.ONE)
+                srv_req = self.robot_request(RobotCommand.FLATTENING, RobotParameter.ZON, RobotParameter.ONE)
             elif button == 'place_drip':
                 srv_req = self.robot_request(RobotCommand.PLACE_DRIP, RobotParameter.ZON, RobotParameter.ONE)
             elif button == 'pickup_kettle':
