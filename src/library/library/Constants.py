@@ -76,7 +76,10 @@ class RobotCommand:
     RESTART = 'RESTART'
     HOME = 'HOME'
     RESET = 'RESET'
-
+class DispenseCommand:
+    WATER_TOGGLE = 'WATER_TOGGLE'
+    WATER_PIN_RESET = 'WATER_PIN_RESET'
+    COFFEE_TOGGLE = 'COFFEE_TOGGLE'
 
 class ResponseDataList:
     response_cd= 999
@@ -116,8 +119,8 @@ class Topic:
 
 class DeviceCode:
     ROBOT = 'ROBOT'
-
-    
+    WATER = 'WATER'
+    COFFEE= 'COFFEE'
 class DeviceStatus:
     STANDBY = 'STANDBY'
     WORKING = 'WORKING'

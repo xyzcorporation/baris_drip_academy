@@ -208,7 +208,7 @@ class RobotSystem:
         try:
             for i in range(len(result_list)):
                 result_str = result_str + result_list[i]
-                if i < len(result_list):
+                if i < len(result_list)-1:
                     result_str += split_char
         except Exception as error:
             print(f"RobotSystem make_str ERROR {error}")
