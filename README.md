@@ -34,6 +34,6 @@
  2.  디스펜서 노드 : 'ros2 run robot_system DispenserNode'
 
 ## ROS2 서비스 / 토픽 이름 (library.Constants.py 참조)
-1. 로봇 Command 토픽 : 'XYZ_robot/status'
-2. 로봇 Command 서비스 서버 : 'XYZ_robot/service'
-3. 디스펜서 Command 서비스 서버 : 'XYZ_dispenser/service' 
+1. 로봇 Command 토픽 : 'XYZ_robot/status'  -> 필요 msg : DispenserStatus
+2. 로봇 Command 서비스 서버 : 'XYZ_robot/service'  -> 필요 srv : RobotService.srv
+3. 디스펜서 Command 서비스 서버 : 'XYZ_dispenser/service'  -> 필요 srv : DispenseService.srv
