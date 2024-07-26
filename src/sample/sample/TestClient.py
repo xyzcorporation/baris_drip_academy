@@ -54,8 +54,18 @@ class SampleNode(Node):
                 srv_req = self.robot_request(RobotCommand.HOME_NORMAL, RobotParameter.ZERO)
             elif button == 'gripper':
                 srv_req = self.robot_request(RobotCommand.GRIPPER_INIT, RobotParameter.ZERO)
-            elif button == 'pickup_dsp':
+            elif button == 'pickup_dsp_1':
                 srv_req = self.robot_request(RobotCommand.PICKUP, RobotParameter.DSP, RobotParameter.ONE)
+            elif button == 'pickup_dsp_2':
+                srv_req = self.robot_request(RobotCommand.PICKUP, RobotParameter.DSP, RobotParameter.TWO)
+            elif button == 'hold':
+                srv_req = self.robot_request(RobotCommand.HOLD, RobotParameter.COF)
+            elif button == 'unhold':
+                srv_req = self.robot_request(RobotCommand.UNHOLD, RobotParameter.COF)
+            elif button == 'flattening':
+                srv_req = self.robot_request(RobotCommand.UNHOLD, RobotParameter.ZON, RobotParameter.ONE)
+            elif button == 'place_drip':
+                srv_req = self.robot_request(RobotCommand.PLACE_DRIP, RobotParameter.ZON, RobotParameter.ONE)
             elif button == 'pickup_kettle':
                 srv_req = self.robot_request(RobotCommand.PICKUP, RobotParameter.KET)
             elif button == 'place_cup':
@@ -74,6 +84,8 @@ class SampleNode(Node):
                 srv_req = self.robot_request(RobotCommand.PLACE, RobotParameter.KET)
             elif button == 'pickup_cup':
                 srv_req = self.robot_request(RobotCommand.PICKUP_CUP, RobotParameter.ZON, RobotParameter.ONE)
+            elif button == 'pickup_drip':
+                srv_req = self.robot_request(RobotCommand.PICKUP_DRIP, RobotParameter.ZON, RobotParameter.ONE)
             elif button == 'place_pic':
                 srv_req = self.robot_request(RobotCommand.PLACE, RobotParameter.PIC, RobotParameter.ONE)
             elif button == 'gesture':
