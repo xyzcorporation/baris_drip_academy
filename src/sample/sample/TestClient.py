@@ -85,61 +85,64 @@ class SampleNode(Node):
             elif button == 'water':
                 srv_req = self.dispenser_request(dev_id='WATER',command= 'WATER_TOGGLE')
                 res = self.dsp_service(self.dispenser_client, srv_req)
-                time.sleep(0.05)
-                srv_req = self.dispenser_request(dev_id='WATER', command='WATER_PIN_RESET')
-                res = self.dsp_service(self.dispenser_client, srv_req)
-
-                time.sleep(8.0)
-
-                srv_req = self.dispenser_request(dev_id='WATER', command='WATER_TOGGLE')
-                res = self.dsp_service(self.dispenser_client, srv_req)
-                time.sleep(0.05)
-                srv_req = self.dispenser_request(dev_id='WATER', command='WATER_PIN_RESET')
-                res = self.dsp_service(self.dispenser_client, srv_req)
+                # time.sleep(0.05)
+                # srv_req = self.dispenser_request(dev_id='WATER', command='WATER_PIN_RESET')
+                # res = self.dsp_service(self.dispenser_client, srv_req)
+                #
+                # time.sleep(8.0)
+                #
+                # srv_req = self.dispenser_request(dev_id='WATER', command='WATER_TOGGLE')
+                # res = self.dsp_service(self.dispenser_client, srv_req)
+                # time.sleep(0.05)
+                # srv_req = self.dispenser_request(dev_id='WATER', command='WATER_PIN_RESET')
+                # res = self.dsp_service(self.dispenser_client, srv_req)
                 continue
             elif button == 'coffee':
-                step = 0
-                while True:
-                    if step == 0:
-                        srv_req = self.robot_request(RobotCommand.PICKUP, RobotParameter.DSP, RobotParameter.TWO)
-                        response = self.call_service(self.client, srv_req)
-                        step += 1
-                    elif step == 1:
-                        srv_req = self.robot_request(RobotCommand.HOLD, RobotParameter.COF, RobotParameter.TWO)
-                        response = self.call_service(self.client, srv_req)
-                        step += 1
-                    elif step == 2:
-                        srv_req = self.dispenser_request(dev_id='COFFEE', command='COFFEE_ON')
-                        res = self.dsp_service(self.dispenser_client, srv_req)
-                        time.sleep(0.05)
-                        srv_req = self.dispenser_request(dev_id='COFFEE', command='COFFEE_PIN_RESET')
-                        res = self.dsp_service(self.dispenser_client, srv_req)
-
-                        time.sleep(0.5)
-
-                        srv_req = self.dispenser_request(dev_id='COFFEE', command='COFFEE_OFF')
-                        res = self.dsp_service(self.dispenser_client, srv_req)
-                        time.sleep(0.05)
-                        srv_req = self.dispenser_request(dev_id='COFFEE', command='COFFEE_PIN_RESET')
-                        res = self.dsp_service(self.dispenser_client, srv_req)
-                        step += 1
-                    elif step == 3:
-                        srv_req = self.robot_request(RobotCommand.HOME_NORMAL, RobotParameter.ZERO)
-                        response = self.call_service(self.client, srv_req)
-                        step += 1
-                    elif step == 4:
-                        srv_req = self.robot_request(RobotCommand.FLATTENING, RobotParameter.ZON, RobotParameter.ONE)
-                        response = self.call_service(self.client, srv_req)
-                        step += 1
-                    elif step == 5:
-                        srv_req = self.robot_request(RobotCommand.PLACE_DRIP, RobotParameter.ZON, RobotParameter.ONE)
-                        response = self.call_service(self.client, srv_req)
-                        step += 1
-
-                    if step > 6:
-                        break
-                    else:
-                        continue
+                srv_req = self.dispenser_request(dev_id='COFFEE', command='COFFEE_ON')
+                res = self.dsp_service(self.dispenser_client, srv_req)
+                continue
+                # step = 0
+                # while True:
+                #     if step == 0:
+                #         srv_req = self.robot_request(RobotCommand.PICKUP, RobotParameter.DSP, RobotParameter.TWO)
+                #         response = self.call_service(self.client, srv_req)
+                #         step += 1
+                #     elif step == 1:
+                #         srv_req = self.robot_request(RobotCommand.HOLD, RobotParameter.COF, RobotParameter.TWO)
+                #         response = self.call_service(self.client, srv_req)
+                #         step += 1
+                #     elif step == 2:
+                #         srv_req = self.dispenser_request(dev_id='COFFEE', command='COFFEE_ON')
+                #         res = self.dsp_service(self.dispenser_client, srv_req)
+                #         time.sleep(0.05)
+                #         srv_req = self.dispenser_request(dev_id='COFFEE', command='COFFEE_PIN_RESET')
+                #         res = self.dsp_service(self.dispenser_client, srv_req)
+                #
+                #         time.sleep(0.5)
+                #
+                #         srv_req = self.dispenser_request(dev_id='COFFEE', command='COFFEE_OFF')
+                #         res = self.dsp_service(self.dispenser_client, srv_req)
+                #         time.sleep(0.05)
+                #         srv_req = self.dispenser_request(dev_id='COFFEE', command='COFFEE_PIN_RESET')
+                #         res = self.dsp_service(self.dispenser_client, srv_req)
+                #         step += 1
+                #     elif step == 3:
+                #         srv_req = self.robot_request(RobotCommand.HOME_NORMAL, RobotParameter.ZERO)
+                #         response = self.call_service(self.client, srv_req)
+                #         step += 1
+                #     elif step == 4:
+                #         srv_req = self.robot_request(RobotCommand.FLATTENING, RobotParameter.ZON, RobotParameter.ONE)
+                #         response = self.call_service(self.client, srv_req)
+                #         step += 1
+                #     elif step == 5:
+                #         srv_req = self.robot_request(RobotCommand.PLACE_DRIP, RobotParameter.ZON, RobotParameter.ONE)
+                #         response = self.call_service(self.client, srv_req)
+                #         step += 1
+                #
+                #     if step > 6:
+                #         break
+                #     else:
+                #         continue
 
             elif button == 'stop_water':
                 srv_req = self.robot_request(Command.RESET, RobotParameter.ZERO)

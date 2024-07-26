@@ -8,11 +8,54 @@ class RobotSystem:
     """
         로봇 시스템 클래스
     """
-    ANSWER_CMD = [RobotCommand.HOME_NORMAL, RobotCommand.GRIPPER_INIT, RobotCommand.PICKUP, RobotCommand.PLACE_CUP, RobotCommand.PICKUP,
-                  RobotCommand.DRAIN_FIT, RobotCommand.HOME_KETTLE, RobotCommand.DRIP, RobotCommand.HOME_KETTLE, RobotCommand.DRAIN_ALL,
-                  RobotCommand.PLACE, RobotCommand.HOME_NORMAL, RobotCommand.PICKUP_CUP, RobotCommand.PLACE, RobotCommand.GESTURE]
-    ANSWER_PARAMETER = [RobotParameter.ZERO, RobotParameter.ZERO, RobotParameter.DSP, RobotParameter.ZON, RobotParameter.KET, RobotParameter.DPO, RobotParameter.ZERO,
-					RobotParameter.DPO, RobotParameter.ZERO, RobotParameter.ZERO, RobotParameter.KET, RobotParameter.ZERO, RobotParameter.ZON, RobotParameter.PIC, RobotParameter.ETC]
+    ANSWER_CMD = [RobotCommand.HOME_NORMAL,
+                  RobotCommand.GRIPPER_INIT,
+                  RobotCommand.PICKUP,
+                  RobotCommand.HOLD,
+                  RobotCommand.UNHOLD,
+                  RobotCommand.HOME_NORMAL,
+                  RobotCommand.FLATTENING,
+                  RobotCommand.PLACE_DRIP,
+                  RobotCommand.PICKUP,
+                  RobotCommand.PLACE_CUP,
+                  RobotCommand.PICKUP,
+                  RobotCommand.DRAIN_FIT,
+                  RobotCommand.HOME_KETTLE,
+                  RobotCommand.DRIP,
+                  RobotCommand.HOME_KETTLE,
+                  RobotCommand.DRAIN_ALL,
+                  RobotCommand.PLACE,
+                  RobotCommand.HOME_NORMAL,
+                  RobotCommand.PICKUP_CUP,
+                  RobotCommand.PLACE,
+                  RobotCommand.PICKUP_DRIP,
+                  RobotCommand.PLACE,
+                  RobotCommand.GESTURE]
+
+    ANSWER_PARAMETER = [RobotParameter.ZERO,
+                        RobotParameter.ZERO,
+                        RobotParameter.DSP,
+                        RobotParameter.COF,
+                        RobotParameter.COF,
+                        RobotParameter.ZERO,
+                        RobotParameter.ZON,
+                        RobotParameter.ZON,
+                        RobotParameter.DSP,
+                        RobotParameter.ZON,
+                        RobotParameter.KET,
+                        RobotParameter.HOT,
+                        RobotParameter.ZERO,
+                        RobotParameter.DPO,
+                        RobotParameter.ZERO,
+                        RobotParameter.ZERO,
+                        RobotParameter.KET,
+                        RobotParameter.ZERO,
+                        RobotParameter.ZON,
+                        RobotParameter.PIC,
+                        RobotParameter.ZON,
+                        RobotParameter.BIN,
+                        RobotParameter.ETC]
+
     def __init__(self):
 
         # 로봇 객체

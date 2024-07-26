@@ -105,11 +105,11 @@ class Constants:
     ROBOTS_SYSTEM = 'RobotSystemNode'
     QOS_DEFAULT = 20
 
-
 class Service:
     SERVICE_ROBOT = 'XYZ_robot/service'
     SERVICE_RTDE = 'XYZ_rtde/service'
-    SERVICE_DISPENSER = 'dispenser/service'
+    SERVICE_DISPENSER = 'XYZ_dispenser/service'
+
 class Topic:
     ROBOT_STATUS = 'XYZ_robot/status'
 
