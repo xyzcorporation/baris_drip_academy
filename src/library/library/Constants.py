@@ -119,7 +119,7 @@ class Constants:
 
 
 class Service:
-    SERVICE_ROBOT = 'robot/service'
+    SERVICE_ROBOT = 'XYZ_robot/service'
     SERVICE_RTDE = 'XYZ_rtde/service'
     SERVICE_DISPENSER = 'XYZ_dispenser/service'
 
