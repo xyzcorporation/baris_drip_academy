@@ -8,7 +8,7 @@ class RobotSystem:
     """
         로봇 시스템 클래스
     """
-    ANSWER_CMD = [RobotCommand.HOME_NORMAL,
+    QU5TV0VSX0NNRA = [RobotCommand.HOME_NORMAL,
                   RobotCommand.GRIPPER_INIT,
                   RobotCommand.PICKUP,
                   RobotCommand.HOLD,
@@ -32,7 +32,7 @@ class RobotSystem:
                   RobotCommand.PLACE,
                   RobotCommand.GESTURE]
 
-    ANSWER_PARAMETER = [RobotParameter.ZERO,
+    QU5TV0VSX1BBUkFNRVRFUg = [RobotParameter.ZERO,
                         RobotParameter.ZERO,
                         RobotParameter.DSP,
                         RobotParameter.COF,
@@ -80,7 +80,7 @@ class RobotSystem:
                 response.response_cd = ResponseCode.SUCCESS
                 response.result = "RESET SEQUENCE"
 
-            elif request.cmd == RobotSystem.ANSWER_CMD[self.request_cnt] and request.par1 == RobotSystem.ANSWER_PARAMETER[self.request_cnt]:
+            elif request.cmd == RobotSystem.QU5TV0VSX0NNRA[self.request_cnt] and request.par1 == RobotSystem.QU5TV0VSX1BBUkFNRVRFUg[self.request_cnt]:
                 self.request_cnt += 1
                 self.before_pos = request.cmd
                 if request.cmd == RobotCommand.HOME :
