@@ -1,7 +1,7 @@
 import time
 
 import rclpy as rp
-from library.Constants import Constants, DispenseCommand
+from library.Constants import Constants, DispenseCommand, Service
 from message.srv import DispenseService
 from rclpy.node import Node
 from robot_system.DIODispenser import DIODispenser
@@ -20,7 +20,7 @@ class DispenserNode(Node):
         super().__init__(Constants.DISPENSER_NODE)
 
         # 아카데미 서비스
-        self.xyz_dispenser_service = self.create_service(DispenseService, 'XYZ_dispenser/service',
+        self.xyz_dispenser_service = self.create_service(DispenseService, Service.SERVICE_DISPENSER,
                                                          self.xyz_callback_service)
 
         # 디스펜서 생성
