@@ -27,3 +27,13 @@
 | 23 | PICKUP_DRIP  | ZON  | 1    | 0    | 0    | 0    | 드립존에 있는 드리퍼 들기   |
 | 24 | PLACE        | BIN  | 0    | 0    | 0    | 0    | 드리퍼 쓰레기통에 버리기    |
 | 25 | GESTURE      | ETC  | 2    | 0    | 0    | 0    | 인사               |
+
+
+## ROS2 서비스 프로그램 실행 방법 
+ 1. 로봇 시스템 노드 : 'ros2 run robot_system RobotSystemNode'
+ 2.  디스펜서 노드 : 'ros2 run robot_system DispenserNode'
+
+## ROS2 서비스 / 토픽 이름 (library.Constants.py 참조)
+1. 로봇 Command 토픽 : 'XYZ_robot/status'
+2. 로봇 Command 서비스 서버 : 'XYZ_robot/service'
+3. 디스펜서 Command 서비스 서버 : 'XYZ_dispenser/service' 
