@@ -22,9 +22,10 @@ class DispenserNode(Node):
         # 아카데미 서비스
         self.xyz_dispenser_service = self.create_service(DispenseService, Service.SERVICE_DISPENSER,
                                                          self.xyz_callback_service)
-
         # 디스펜서 생성
         self.dispenser = DIODispenser()
+
+        self.get_logger().info('Dispenser Node Init!!')
 
     def xyz_callback_service(self, request, response):
         self.get_logger().info(f' Request Cmd : {request.command}')

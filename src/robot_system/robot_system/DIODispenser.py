@@ -14,6 +14,9 @@ class DIODispenser():
         self.status = DeviceStatus.STANDBY
         self.before_cmd = ""
 
+    def get_before_cmd(self):
+        return self.before_cmd
+
     def dispense(self, command):
         """
            디스펜싱  처리 메소드
