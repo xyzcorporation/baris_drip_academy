@@ -87,8 +87,6 @@ class RobotSystemNode(Node):
             topic_msg.node_status = component_list[0].status
             self.publisher.publish(topic_msg)
 
-            print("1111111timer_execute11111")
-
         except Exception as error:
             print(f"RobotSystemNode timer_execute {error=}, {type(error)=}")
            

@@ -33,6 +33,7 @@ class Command:
     PICKUP_SYRUP = 'pickup_syrup'
     TEACH = 'TEACH'
     ENDTEACH = 'ENDTEACH'
+    RESET = 'reset'
 
 
 class RobotParameter:
@@ -68,12 +69,15 @@ class RobotCommand:
     RESTART = 'RESTART'
     HOME = 'HOME'
     RESET = 'RESET'
+
+
 class ResponseDataList:
     response_cd= 999
     status_cd = ""
     component_cd = ""
     data_list = []
     cmd = ""
+
 
 class ResponseCode:
     SUCCESS = 0  # 정상
@@ -82,6 +86,8 @@ class ResponseCode:
     STANDBY = 3  # STANDBY 상태
     WORKING = 4  # WORKING 상태
     ERROR = 9
+
+
 class Constants:
     ZERO = 0
     ONE = 1
@@ -92,16 +98,22 @@ class Constants:
     ROBOTS_SYSTEM = 'RobotSystemNode'
     QOS_DEFAULT = 20
 
+
 class Service:
     SERVICE_ROBOT = 'XYZ_robot/service'
     SERVICE_RTDE = 'XYZ_rtde/service'
 
+
 class Topic:
     ROBOT_STATUS = 'XYZ_robot/status'
+
+
 class DeviceCode:
     ROBOT = 'ROBOT'
+
     
 class DeviceStatus:
     STANDBY = 'STANDBY'
     WORKING = 'WORKING'
     ERROR = 'ERROR'
+    RESET = 'RESET'

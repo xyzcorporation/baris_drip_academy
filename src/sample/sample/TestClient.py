@@ -2,7 +2,7 @@ import rclpy as rp
 from rclpy.node import Node
 from rclpy.qos import QoSProfile
 
-from library.Constants import Service, RobotCommand, RobotParameter
+from library.Constants import Service, RobotCommand, RobotParameter, Command
 from message.srv import RobotService
 import traceback
 import datetime
@@ -46,14 +46,20 @@ class SampleNode(Node):
         self.execute_node()
 
 
-
     def execute_node(self):
         while self.client.service_is_ready():
             srv_req = RobotService.Request()
-            button = input('Button')
-
+            button = input('Button : ')
             if button == 'home':
-                srv_req = self.robot_request(RobotCommand.HOME_NORMAL,RobotParameter.ZERO)
+                srv_req = self.robot_request(RobotCommand.HOME_NORMAL, RobotParameter.ZERO)
+            elif button == 'gripper':
+                srv_req = self.robot_request(RobotCommand.GRIPPER_INIT, RobotParameter.ZERO)
+            elif button == 'pickup_dsp':
+                srv_req = self.robot_request(RobotCommand.PICKUP, RobotParameter.DSP)
+            elif button == 'place_cup':
+                srv_req = self.robot_request(RobotCommand.PLACE_CUP, RobotParameter.ZON)
+            elif button == 'reset':
+                srv_req = self.robot_request(Command.RESET, RobotParameter.ZERO)
             else:
                 srv_req = None
             response = self.call_service(self.client, srv_req)
