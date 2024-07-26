@@ -39,6 +39,7 @@ class Command:
 class RobotParameter:
     ZERO = '0'
     ONE = '1'
+    TWO = '2'
     DSP = 'DSP'
     ZON = 'ZON'
     KET = 'KET'
@@ -107,8 +108,7 @@ class Constants:
 class Service:
     SERVICE_ROBOT = 'XYZ_robot/service'
     SERVICE_RTDE = 'XYZ_rtde/service'
-
-
+    SERVICE_DISPENSER = 'dispenser/service'
 class Topic:
     ROBOT_STATUS = 'XYZ_robot/status'
 

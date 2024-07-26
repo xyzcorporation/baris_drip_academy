@@ -24,6 +24,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   # Service
   "srv/RobotService.srv"
   "srv/RtdeService.srv"
+  "srv/DispenseService.srv"
 )
 
 if(BUILD_TESTING)
